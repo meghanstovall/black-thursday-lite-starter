@@ -1,7 +1,10 @@
-require_relative 'merchant'
+require './lib/merchant'
+require './lib/csv_loadable'
 require 'csv'
 
 class MerchantCollection
+  include CsvLoadable
+
   attr_reader :merchants
 
   def initialize(csv_file_path)
@@ -9,10 +12,7 @@ class MerchantCollection
   end
 
   def create_merchants(csv_file_path)
-    csv = CSV.read("#{csv_file_path}", headers: true, header_converters: :symbol)
-    csv.map do |row|
-       Merchant.new(row)
-    end
+    load_from_csv(csv_file_path, Merchant)
   end
 
   def all

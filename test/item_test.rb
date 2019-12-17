@@ -12,7 +12,7 @@ class ItemTest < Minitest::Test
       :merchant_id => 2
     })
 
-    @items = Item.create_items('./test/fixtures/items_truncated.csv')
+    @items = Item.from_csv('./test/fixtures/items_truncated.csv')
     @csv_item = @items[2]
   end
 
