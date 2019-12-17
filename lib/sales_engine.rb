@@ -1,4 +1,4 @@
-require './lib/item_collection'
+require './lib/item'
 require './lib/merchant_collection'
 
 class SalesEngine
@@ -16,8 +16,8 @@ class SalesEngine
     @merchant_path = merchant_path
   end
 
-  def item_collection
-    ItemCollection.new(@item_path)
+  def items
+    Item.create_items(@item_path)
   end
 
   def merchant_collection

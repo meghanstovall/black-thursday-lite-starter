@@ -5,8 +5,8 @@ require './lib/sales_engine'
 class SalesEngineTest < Minitest::Test
   def setup
     @sales_engine = SalesEngine.from_csv({
-      :items     => "./data/items.csv",
-      :merchants => "./data/merchants.csv",
+      :items     => './test/fixtures/items_truncated.csv',
+      :merchants => './test/fixtures/merchants_truncated.csv',
     })
   end
 
@@ -15,12 +15,13 @@ class SalesEngineTest < Minitest::Test
   end
 
   def test_it_has_attributes
-    assert_equal "./data/items.csv", @sales_engine.item_path
-    assert_equal "./data/merchants.csv", @sales_engine.merchant_path
+    assert_equal './test/fixtures/items_truncated.csv', @sales_engine.item_path
+    assert_equal './test/fixtures/merchants_truncated.csv', @sales_engine.merchant_path
   end
 
-  def test_it_can_create_an_item_collection
-    assert_instance_of ItemCollection, @sales_engine.item_collection
+  def test_it_has_items
+    assert_instance_of Array, @sales_engine.items
+    assert_equal 4, @sales_engine.items.length
   end
 
   def test_it_can_create_a_merchant_collection
